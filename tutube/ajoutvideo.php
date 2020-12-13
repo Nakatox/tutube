@@ -1,4 +1,3 @@
-<!-- - Un formulaire d’ajout de vidéo avec les champs titre, url et description -->
 <?php
 session_start();
 $wrong = [];
@@ -51,20 +50,55 @@ if (isset($_POST['title']) && isset($_POST['url']) && isset($_POST['description'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add a video</title>
 </head>
+<style>
+    body{
+        background-color: #a31c23;
+    }
+    form{
+        display:flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-left: 20%;
+        padding-right: 20%;
+        text-align: center;
+        border: 3px solid white;
+        margin-top: 150px ;
+        margin-left: 300px ;
+        margin-right: 300px ;
+    }
+    form p{
+        
+        color: white;
+        font-size:30px;
+        text-decoration: underline;
+    }
+    .row {
+        border: 3px solid white;
+        color: white;
+        text-align: center;
+        font-size: 30px;
+    }
+    .btn{
+        margin:20px;
+        padding:5px;
+    }
+</style>    
 <body>
 <?php require 'header.php'; ?>
     <form action="" method="POST">
-    Enter the video title :<input type="text" name = "title"> (Must be under 30 characters)
+   <p> Enter the video title :</p><input type="text" name = "title"> (Must be under 30 characters)
     <br>
-    His url :<input type="text" name="url">
+    <p>His url :</p><input type="text" name="url">
     <br>
-    And his description :<textarea width="100px" height="50px" name = "description"></textarea>
+    <p>And his description :</p><textarea width="100px" height="50px" name = "description"></textarea>(Must be under 200 characters)
     <br>
-    <input type="submit" value="Add the video">
+    <input type="submit" value="Add the video" class="btn">
     </form>
     <br>
+    <div class="row">
     <?php foreach($wrong as $value):?>
-    <?php echo $value . '<br/>' ?>
+        <p><?php echo $value . '<br/>' ?></p>
     <?php endforeach ?>
+    </div>
 </body>
 </html>

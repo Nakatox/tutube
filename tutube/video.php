@@ -49,29 +49,88 @@ header("Refresh:0");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    body{
+        background-color: #a31c23;
+    }
+    iframe{
+        display:flex;
+        margin-left: 10%;
+        border: 3px solid white;
+        
+    }
+    form{
+        display:flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-left: 20%;
+        padding-right: 20%;
+        text-align: center;
+        border: 3px solid white;
+     
+        margin-left: 300px ;
+        margin-right: 300px ;
+    }
+    form p{
+        
+        color: white;
+        font-size:30px;
+        text-decoration: underline;
+    }
+    .row {
+        border: 3px solid white;
+        color: white;
+        text-align: center;
+        font-size: 30px;
+        margin-top: 50px;
+    }
+    .btn{
+        margin:20px;
+        padding:5px;
+    }
+    .desc{
+        text-align: center;
+        color: white;
+        font-size: 20px;
+       
+    }
+    a{
+        text-decoration: none;
+        color: white;
+        border: 3px solid white;
+        border-radius: 50px;
+        padding:7px;
+    }
+</style>
 <body>
+    
 <?php require 'header.php'; ?>
-<iframe id="ytplayer" type="text/html" width="800px" height="400px"
-    src="https://www.youtube.com/embed/<?php echo $id ?>?rel=0&showinfo=0&color=white&iv_load_policy=3"
-    frameborder="0" allowfullscreen></iframe> 
-    <?php if(isset($_SESSION['pseudo'])): ?>
-    <a href="supr.php?videoid=<?php echo $videos['id'] ?>">Delete this video</a>
-    <?php endif; ?>
+<div class="row">
     <?php echo $videos['title'] ?>
-    <?php echo $videos['description'] ?>
-    <?php if(isset($_SESSION['pseudo'])): ?>
+</div>
+
+<iframe id="ytplayer" type="text/html" width="1200px" height="760px"
+    src="https://www.youtube.com/embed/<?php echo $id ?>?rel=0&showinfo=0&color=white&iv_load_policy=3"
+    frameborder="0" allowfullscreen>
+</iframe> 
+
+<?php if(isset($_SESSION['pseudo'])): ?>
+    <p class="desc">Description :<?php echo $videos['description'] ?></p> 
+        <?php if(isset($_SESSION['pseudo'])): ?>
+            <p class="desc"> <a href="supr.php?videoid=<?php echo $videos['id'] ?>">Delete this video</a></p> 
+        <?php endif; ?>
 
     <form action="" method="POST">
-        Edit the informations 
-        <br>
-        Title : <input type="text" value="<?php echo $videos['title'] ?>" name="title">
-        <br>
-        Url : <input type="text" value="<?php echo $videos['url'] ?>" name="url">
-        <br>
-        Description : <input type="text" value="<?php echo $videos['description'] ?>" name="description">
-        <br>
-        <input type="submit" value="Edit">
+        <p>Edit the informations </p>
+            <br>
+            <p> Title : </p><input type="text" value="<?php echo $videos['title'] ?>" name="title">
+            <br>
+            <p>Url : </p><input type="text" value="<?php echo $videos['url'] ?>" name="url">
+            <br>
+            <p>Description : </p><input type="text" value="<?php echo $videos['description'] ?>" name="description">
+            <br>
+            <input type="submit" class="btn"value="Edit">
     </form>
-    <?php endif ?>
+<?php endif ?>
 </body>
 </html>

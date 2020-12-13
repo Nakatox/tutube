@@ -1,4 +1,3 @@
-<!-- - Un formulaire d’inscription avec les champs email, mot de passe et pseudo -->
 <?php
 
 $missingfields = "";
@@ -13,8 +12,8 @@ if (isset($_POST['email']) && isset($_POST['pseudo']) && isset($_POST['password'
         die('error on db' . $e->getMessage());
     }
 
-$tab = $database->prepare('SELECT `pseudo`, `email` FROM `user`');
-$tab->execute();
+    $tab = $database->prepare('SELECT `pseudo`, `email` FROM `user`');
+    $tab->execute();
 
 
     $missingfields = "";
@@ -55,12 +54,12 @@ $tab->execute();
             die('error on db' . $e->getMessage());
         }
     
-    $query = $database->prepare('INSERT INTO `user`(`pseudo`, `email`, `password`) VALUES (:pseudo, :email,  :password)');
-    $query->execute([
-        'email' => $_POST['email'],
-        'password' => $_POST['password'],
-        'pseudo' => $_POST['pseudo'],
-    ]);
+        $query = $database->prepare('INSERT INTO `user`(`pseudo`, `email`, `password`) VALUES (:pseudo, :email,  :password)');
+        $query->execute([
+            'email' => $_POST['email'],
+            'password' => $_POST['password'],
+            'pseudo' => $_POST['pseudo'],
+        ]);
     header('Location:connexion.php');
     }
 }else{
@@ -75,22 +74,58 @@ $tab->execute();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
 </head>
+<style>
+    body{
+        background-color: #a31c23;
+    }
+    form{
+        display:flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-left: 20%;
+        padding-right: 20%;
+        text-align: center;
+        border: 3px solid white;
+        margin-top: 150px ;
+        margin-left: 300px ;
+        margin-right: 300px ;
+    }
+    form p{
+        
+        color: white;
+        font-size:30px;
+        text-decoration: underline;
+    }
+    .row {
+        border: 3px solid white;
+        color: white;
+        text-align: center;
+        font-size: 30px;
+    }
+    .btn{
+        margin:20px 20px 0 20px;
+        padding:5px;
+    }
+</style>
 <body>
 <?php require 'header.php'; ?>
-    <form action="" method="POST">
-        Pseudo :<input type="text" name="pseudo"> (4 characters minimun)
-        <br>
-        Email :<input type="text" name="email">
-        <br>
-        Password :<input type="password" name="password"> (4 characters minimun)
-        <br>
-        Confirm Password :<input type="password" name="confirm"> 
-        <br>
-        <input type="submit" value = "Create my account"/>
-    </form>
+<form action="" method="POST">
+    <p>Pseudo :</p> <input type="text" name="pseudo"> (4 characters minimun)
     <br>
+    <p>Email :</p> <input type="text" name="email">
+    <br>
+    <p>Password :</p> <input type="password" name="password"> (4 characters minimun)
+    <br>
+    <p>Confirm Password : </p> <input type="password" name="confirm">
+    <br>
+    <br>
+    <input type="submit" class="btn"value = "Create my account"/></p> 
+</form>
+    
+<div class="row">
     <?php foreach($wrong as $value):?>
-    <?php echo $value . '<br/>' ?>
+        <p><?php echo $value  ?></p>
     <?php endforeach ?>
+</div>
 </body>
 </html>
