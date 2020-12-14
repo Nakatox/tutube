@@ -1,7 +1,8 @@
 <?php
 session_start();
 $wrong = [];
-if (isset($_POST['title']) && isset($_POST['url']) && isset($_POST['description'])) {
+$missingfields = "";
+if (isset($_POST['title']) && !empty($_POST['title']) && isset($_POST['url']) &&!empty($_POST['url'])  && isset($_POST['description']) && !empty($_POST['description']) ) {
     
     $title = htmlspecialchars($_POST['title']);
     $url = htmlspecialchars($_POST['url']);
@@ -41,7 +42,9 @@ if (isset($_POST['title']) && isset($_POST['url']) && isset($_POST['description'
             
             
         }
-    }
+}else{
+    $missingfields = "There is a empty field";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,6 +99,7 @@ if (isset($_POST['title']) && isset($_POST['url']) && isset($_POST['description'
     </form>
     <br>
     <div class="row">
+        <?php echo $missingfields ?>
     <?php foreach($wrong as $value):?>
         <p><?php echo $value . '<br/>' ?></p>
     <?php endforeach ?>
